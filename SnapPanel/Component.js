@@ -93,6 +93,10 @@ Component = Class.extend({
 		return this.dirty;
 	},
 	
+	markDirty: function() {
+		this.dirty = true;
+	},
+	
 	getAttributes: function() {
 		return this.attributes;
 	},

@@ -81,9 +81,5 @@ var Scrollbar = Component.extend({
 			this.setWidth(this.length);
 			this.setHeight(this.fatness);
 		}
-		
-		//this.setType('scrollbar' + (this.vertical ? '(v)' : '(h)'));
-		
-		//ArtSchool.canvas.registerDraggable(this);
 	}
 });

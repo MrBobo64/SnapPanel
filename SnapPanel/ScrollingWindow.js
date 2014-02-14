@@ -34,7 +34,13 @@ ScrollingWindow = Container.extend({
 	},
 
 	arrange: function() {
+		//console.log("setting widht to " + this.getWidth());
+		//this.getContent().setWidth(this.getWidth());
+		//console.log("width is now " + this.getContent().getWidth());
+		//return;
+	
 		var tiling = this.getTiling();
+		console.log(tiling);
 		if(tiling.fill == 'flex') {
 			if(tiling.tiling == 'vertical') {
 				this.getComponents()[0].setWidth(this.getWidth());
@@ -57,24 +63,28 @@ ScrollingWindow = Container.extend({
 				x: this.getX(),
 				y: this.getY()
 			});
+			console.log(this.snap);
 			
-			var mask = this.snap.rect(0, 0, this.getWidth(), this.getHeight());
-			mask.attr({
-				fill: '#fff'
-			});
-			
-			var content = this.getComponents()[0].draw();
-			content.attr({
-				mask: mask
-			});
-			
-			this.snap.add(content);
 			var frame = this.getSnap().rect(0, 0, this.getWidth(), this.getHeight());
 			frame.attr({
 				fill: 'none',
 				stroke: '#00FF00',
 				strokeWidth: 2
 			});
+			
+			/*var mask = this.snap.rect(0, 0, this.getWidth(), this.getHeight());
+			mask.attr({
+				fill: '#fff'
+			});*/
+			
+			//this.getContent().setX(-this.scrollX);
+			//this.getContent().setY(-this.scrollY);
+			this.getContent().markDirty();
+			var content = this.getContent().draw();
+			/*content.attr({
+				mask: mask
+			});*/
+			this.snap.add(content);
 			
 			var hSnap = this.hScrollbar.draw();
 			var vSnap = this.vScrollbar.draw();
@@ -151,6 +161,9 @@ ScrollingWindow = Container.extend({
 		this.vScrollbar = new Scrollbar(this, true);
 		
 		this.snap = null;
+		
+		this.scrollX = 0;
+		this.scrollY = 0;
 		
 		this.addComponent(content);
 	}

@@ -189,6 +189,7 @@ Container = Component.extend({
 	
 	positionVertical: function() {
 		//console.log("### pos vert");
+		console.log(this.getComponents());
 	
 		var tiling = this.getTiling();
 	

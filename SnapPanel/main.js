@@ -4,22 +4,28 @@ var paper = Snap(document.getElementById('s'));
 var clusterPanel = new Container(null, {
 	tiling: {
 		tiling: 'vertical',
-        fill: 'flex',
-        stretch: 'full'
+        fill: 'none',
+        stretch: 'full',
+		margin: 10,
+		spacing: 10
 	}
 });
 var hostPanel = new Container(null, {
 	tiling: {
 		tiling: 'vertical',
-        fill: 'flex',
-        stretch: 'full'
+        fill: 'none',
+        stretch: 'full',
+		margin: 10,
+		spacing: 10
 	}
 });
 var targetPanel = new Container(null, {
 	tiling: {
 		tiling: 'vertical',
-        fill: 'flex',
-        stretch: 'full'
+        fill: 'none',
+        stretch: 'full',
+		margin: 10,
+		spacing: 10
 	}
 });
 
@@ -35,9 +41,9 @@ var topPanel = new Container(null, {
 	},
 	
 	components: [
-		new ScrollingWindow(clusterPanel, {tiling: {tiling: 'vertical', fill: 'flex'}}),
-		/*new ScrollingWindow(*/hostPanel,/* {tiling: {tiling: 'vertical', fill: 'flex'}}),*/
-		/*new ScrollingWindow(*/targetPanel/*, {tiling: {tiling: 'vertical', fill: 'flex'}})*/
+		new ScrollingWindow(clusterPanel, null, {tiling: {tiling: 'vertical', fill: 'flex'}}),
+		new ScrollingWindow(hostPanel, null, {tiling: {tiling: 'vertical', fill: 'flex'}}),
+		new ScrollingWindow(targetPanel, null, {tiling: {tiling: 'vertical', fill: 'flex'}})
 	]
 });
 
@@ -91,6 +97,11 @@ var mainPanel = new Container(null, {
 		height: window.innerHeight
 	}
 });
+
+colors = ['#22FF22', '#22DD22', '#22BB22', '#22AA22', '#229922', '#228822'];
+for(var i = 0; i < 12; i++) {
+	clusterPanel.addComponent(new Rectangle(100, 40, {fill: colors[i%6]}));
+}
 
 mainPanel.draw();
 paper.add(mainPanel.getSnap());
