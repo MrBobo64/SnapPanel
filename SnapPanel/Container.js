@@ -1,6 +1,6 @@
 
 Container = Component.extend({
-    
+	
     getComponents: function() {
 		return this.components;
 	},
@@ -8,21 +8,11 @@ Container = Component.extend({
     addComponent: function(component) {
         this.components.push(component);
         component.setParent(this);
-        
-        //var retSnap = component.getSnap().remove();
-        //component.setSnap(retSnap);
-        this.getSnap().add(component.getSnap());
     },
     
     removeComponentAtIndex: function(i) {
         var component = this.components[i];
         this.components.splice(i, 1);
-        
-        //TODO: yeah?
-        component.setParent(null);
-        // The component still holds its own snap, right?
-        component.getSnap().remove();
-        
         return component;
     },
 
@@ -84,6 +74,8 @@ Container = Component.extend({
 	},
 	
 	positionVerticalFlex: function() {
+		//console.log("### pos vert flex");
+	
 		var totalFlex = this.getTotalFlex();
 		var totalFlexRoom = this.getTotalFlexRoom();
 		var currentY = 0;
@@ -121,7 +113,13 @@ Container = Component.extend({
 				
 				c.setY(currentY);
 				c.setWidth(this.getWidth()); //TODO: if stretch
+				//console.log("stretched to " + this.getWidth());
+				//console.log("but its " + c.getWidth());
+				
 				c.setHeight(newHeight);
+				
+				//console.log("just set height to " + newHeight);
+				//console.log("but its currently " + c.getHeight());
 				
 				currentY += newHeight; //TODO: border, margin?
 			}
@@ -136,6 +134,8 @@ Container = Component.extend({
 	},
 	
 	positionHorizontalFlex: function() {
+		//console.log("### pos horiz flex");
+	
 		var totalFlex = this.getTotalFlex();
 		var totalFlexRoom = this.getTotalFlexRoom();
 		var currentX = 0;
@@ -188,6 +188,8 @@ Container = Component.extend({
 	},
 	
 	positionVertical: function() {
+		//console.log("### pos vert");
+	
 		var tiling = this.getTiling();
 	
 		var translation = {x: 0, y: 0};
@@ -234,11 +236,13 @@ Container = Component.extend({
 		}
 		
 		//TODO: yeah?
-        console.log("setting height to " + (translation.y + tiling.margin));
+        //console.log("setting height to " + (translation.y + tiling.margin));
 		this.setHeight(translation.y + tiling.margin);
 	},
 	
 	positionHorizontal: function() {
+		//console.log("### pos horiz");
+	
 		var tiling = this.getTiling();
 	
 		var translation = {x: 0, y: 0};
@@ -318,12 +322,38 @@ Container = Component.extend({
     
     draw: function() {
         this.arrange();
+		
+		if(!this.snap || this.isDirty()) {
+			if(this.snap) {
+				this.snap.remove();
+			}
+			this.snap = Snap(this.getWidth(), this.getHeight());
+			this.snap.attr({
+				x: this.getX(),
+				y: this.getY()
+			});
+			
+			for(var i = 0; i < this.getComponents().length; i++) {
+				var c = this.getComponents()[i];
+				var s = c.draw();
+				this.snap.add(s);
+			}
+		
+			var frame = this.getSnap().rect(0, 0, this.getWidth(), this.getHeight());
+			frame.attr({
+				fill: 'none',
+				stroke: 'blue',
+				strokeWidth: 2
+			});
+		}
+		
+		return this.snap;
     },
     
     //////////////////////////////////////////////////////////////
     
-    init: function(snap, attributes, config) {
-        this._super(snap, attributes, config);
+    init: function(attributes, config) {
+        this._super(attributes, config);
         
         this.components = [];
         this.tiling = new Tiling(config && config.tiling || null);
