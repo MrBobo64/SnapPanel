@@ -37,7 +37,7 @@ var topPanel = new Container(null, {
 	},
 	
 	arrangement: {
-		flex: 2
+		flex: 3
 	},
 	
 	components: [
@@ -71,7 +71,7 @@ var bottomPanel = new Container(null, {
 	},
 	
 	arrangement: {
-		flex: 1
+		flex: 2
 	},
 	
 	components: [
@@ -98,10 +98,13 @@ var mainPanel = new Container(null, {
 	}
 });
 
-colors = ['#22FF22', '#22DD22', '#22BB22', '#22AA22', '#229922', '#228822'];
-for(var i = 0; i < 12; i++) {
-	clusterPanel.addComponent(new Rectangle(100, 40, {fill: colors[i%6]}));
-}
+//colors = ['#22FF22', '#22DD22', '#22BB22', '#22AA22', '#229922', '#228822'];
+//for(var i = 0; i < 12; i++) {
+//	clusterPanel.addComponent(new Rectangle(100, 40, {fill: colors[i%6]}));
+//}
+
+var clusterBox = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+clusterPanel.addComponent(clusterBox);
 
 mainPanel.draw();
 paper.add(mainPanel.getSnap());
