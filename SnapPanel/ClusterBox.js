@@ -25,6 +25,8 @@ ClusterBox = Component.extend({
                 "font-family": "Lucida Console",
                 "font-size": 48
             });
+			
+			this.bg.click(this.onClick);
         }
         
         return this.snap;
@@ -39,5 +41,9 @@ ClusterBox = Component.extend({
         
         this.setWidth(40);
         this.setHeight(70);
-    }
+    },
+	
+	onClick: function() {
+		console.log(this);
+	}
 });

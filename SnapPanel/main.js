@@ -106,6 +106,29 @@ var mainPanel = new Container(null, {
 var clusterBox = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
 clusterPanel.addComponent(clusterBox);
 
+var clusterBox1 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+var clusterBox2 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+var clusterBox3 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+var clusterBox4 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+var clusterBox5 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+var clusterBox6 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+var clusterBox7 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+var clusterBox8 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+var clusterBox9 = new ClusterBox("one", "http://www.adiumxtras.com/images/thumbs/dango_status_icon_set_7_19047_6248_thumb.png");
+
+
+clusterPanel.addComponent(clusterBox1);
+clusterPanel.addComponent(clusterBox2);
+clusterPanel.addComponent(clusterBox3);
+clusterPanel.addComponent(clusterBox4);
+clusterPanel.addComponent(clusterBox5);
+clusterPanel.addComponent(clusterBox6);
+clusterPanel.addComponent(clusterBox7);
+clusterPanel.addComponent(clusterBox8);
+clusterPanel.addComponent(clusterBox9);
+
+
+
 mainPanel.draw();
 paper.add(mainPanel.getSnap());
 
